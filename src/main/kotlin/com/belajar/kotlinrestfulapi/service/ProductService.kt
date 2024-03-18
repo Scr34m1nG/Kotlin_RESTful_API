@@ -1,6 +1,7 @@
 package com.belajar.kotlinrestfulapi.service
 
 import com.belajar.kotlinrestfulapi.model.CreateProductRequest
+import com.belajar.kotlinrestfulapi.model.ListProductRequest
 import com.belajar.kotlinrestfulapi.model.ProductResponse
 import com.belajar.kotlinrestfulapi.model.UpdateProductRequest
 
@@ -13,5 +14,7 @@ interface ProductService {
     fun update(id: String, updateProductRequest: UpdateProductRequest): ProductResponse
 
     fun delete(id: String)
+
+    fun list(listProductRequest: ListProductRequest): List<ProductResponse>
 
 }

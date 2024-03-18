@@ -3,15 +3,17 @@ package com.belajar.kotlinrestfulapi.service.impl
 import com.belajar.kotlinrestfulapi.entity.Product
 import com.belajar.kotlinrestfulapi.error.NotFoundException
 import com.belajar.kotlinrestfulapi.model.CreateProductRequest
+import com.belajar.kotlinrestfulapi.model.ListProductRequest
 import com.belajar.kotlinrestfulapi.model.ProductResponse
 import com.belajar.kotlinrestfulapi.model.UpdateProductRequest
 import com.belajar.kotlinrestfulapi.repository.ProductRepository
 import com.belajar.kotlinrestfulapi.service.ProductService
 import com.belajar.kotlinrestfulapi.validation.ValidationUtil
-import org.aspectj.weaver.ast.Not
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
+import java.util.stream.Collectors
 
 @Service
 class ProductServiceImpl(val productRepository: ProductRepository,
@@ -59,6 +61,15 @@ class ProductServiceImpl(val productRepository: ProductRepository,
     override fun delete(id: String) {
         val product = findProductByIdOrThrowNotFound(id)
         productRepository.delete(product)
+    }
+
+    override fun list(listProductRequest: ListProductRequest): List<ProductResponse> {
+        val page = productRepository.findAll(PageRequest.of(listProductRequest.page, listProductRequest.size))
+        val product: List<Product> = page.get().collect(Collectors.toList())
+
+        return product.map {
+            convertProductToProductResponse(it)
+        }
     }
 
     private fun convertProductToProductResponse(product: Product): ProductResponse{
