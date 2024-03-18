@@ -1,5 +1,13 @@
 # API Spec
 
+## Authentication
+
+all api must use this authentication
+
+request :
+- header :
+  - X-AI-Key : "Your secret api key"
+
 ## Create Product
 
 request :
