@@ -26,6 +26,6 @@ data class Product(
     val createdAt: Date,
 
     @Column(name = "updateAt")
-    val updatedAt: Date?
+    var updatedAt: Date?
 
 )
