@@ -1,7 +1,10 @@
 package com.belajar.kotlinrestfulapi.service
 
+import com.belajar.kotlinrestfulapi.model.CreateProductRequest
+import com.belajar.kotlinrestfulapi.model.ProductResponse
+
 interface ProductService {
 
-    fun create():
+    fun create(createProductRequest: CreateProductRequest): ProductResponse
 
 }
