@@ -58,6 +58,7 @@ class ProductServiceImpl(val productRepository: ProductRepository,
 
     override fun delete(id: String) {
         val product = findProductByIdOrThrowNotFound(id)
+        productRepository.delete(product)
     }
 
     private fun convertProductToProductResponse(product: Product): ProductResponse{
