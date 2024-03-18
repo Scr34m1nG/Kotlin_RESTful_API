@@ -6,6 +6,7 @@ import com.belajar.kotlinrestfulapi.model.ProductResponse
 import com.belajar.kotlinrestfulapi.repository.ProductRepository
 import com.belajar.kotlinrestfulapi.service.ProductService
 import com.belajar.kotlinrestfulapi.validation.ValidationUtil
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -35,5 +36,22 @@ class ProductServiceImpl(val productRepository: ProductRepository,
             createdAt = product.createdAt,
             updatedAt = product.updatedAt
         )
+    }
+
+    override fun get(id: String): ProductResponse {
+        val product = productRepository.findByIdOrNull(id)
+
+        if (product == null) {
+            //
+        } else{
+            return ProductResponse(
+                id = product.id,
+                name = product.name,
+                price = product.price,
+                quantity = product.quantity,
+                createdAt = product.createdAt,
+                updatedAt = product.updatedAt
+            )
+        }
     }
 }
