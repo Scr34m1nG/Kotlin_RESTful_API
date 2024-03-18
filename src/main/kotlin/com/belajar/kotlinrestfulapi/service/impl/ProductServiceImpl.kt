@@ -8,6 +8,7 @@ import com.belajar.kotlinrestfulapi.model.UpdateProductRequest
 import com.belajar.kotlinrestfulapi.repository.ProductRepository
 import com.belajar.kotlinrestfulapi.service.ProductService
 import com.belajar.kotlinrestfulapi.validation.ValidationUtil
+import org.aspectj.weaver.ast.Not
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
@@ -72,5 +73,14 @@ class ProductServiceImpl(val productRepository: ProductRepository,
             createdAt = product.createdAt,
             updatedAt = product.updatedAt
         )
+    }
+
+    private fun findProductByIdOrThrowNotFound(id: String): Product{
+        val product = productRepository.findByIdOrNull(id)
+        if (product == null){
+            throw NotFoundException()
+        } else {
+            return product
+        }
     }
 }
