@@ -35,13 +35,8 @@ class ProductServiceImpl(val productRepository: ProductRepository,
     }
 
     override fun get(id: String): ProductResponse {
-        val product = productRepository.findByIdOrNull(id)
-
-        if (product == null) {
-            throw NotFoundException()
-        } else{
-            return convertProductToProductResponse(product)
-        }
+        val product = findProductByIdOrThrowNotFound(id)
+        return convertProductToProductResponse(product)
     }
 
     override fun update(id: String, updateProductRequest: UpdateProductRequest): ProductResponse {
