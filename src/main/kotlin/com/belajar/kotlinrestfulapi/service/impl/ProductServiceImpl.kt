@@ -5,12 +5,17 @@ import com.belajar.kotlinrestfulapi.model.CreateProductRequest
 import com.belajar.kotlinrestfulapi.model.ProductResponse
 import com.belajar.kotlinrestfulapi.repository.ProductRepository
 import com.belajar.kotlinrestfulapi.service.ProductService
+import com.belajar.kotlinrestfulapi.validation.ValidationUtil
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class ProductServiceImpl(val productRepository: ProductRepository) : ProductService{
+class ProductServiceImpl(val productRepository: ProductRepository,
+                         val validationUtil: ValidationUtil
+) : ProductService{
     override fun create(createProductRequest: CreateProductRequest): ProductResponse {
+        validationUtil.validate(createProductRequest)
+
         val product = Product(
             id = createProductRequest.id!!,
             name = createProductRequest.name!!,
