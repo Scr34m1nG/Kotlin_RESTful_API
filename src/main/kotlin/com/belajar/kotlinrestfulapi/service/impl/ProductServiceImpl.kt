@@ -1,6 +1,7 @@
 package com.belajar.kotlinrestfulapi.service.impl
 
 import com.belajar.kotlinrestfulapi.entity.Product
+import com.belajar.kotlinrestfulapi.error.NotFoundException
 import com.belajar.kotlinrestfulapi.model.CreateProductRequest
 import com.belajar.kotlinrestfulapi.model.ProductResponse
 import com.belajar.kotlinrestfulapi.repository.ProductRepository
@@ -28,6 +29,20 @@ class ProductServiceImpl(val productRepository: ProductRepository,
 
         productRepository.save(product)
 
+        return convertProductToProductResponse(product)
+    }
+
+    override fun get(id: String): ProductResponse {
+        val product = productRepository.findByIdOrNull(id)
+
+        if (product == null) {
+            throw NotFoundException()
+        } else{
+            return convertProductToProductResponse(product)
+        }
+    }
+
+    private fun convertProductToProductResponse(product: Product): ProductResponse{
         return ProductResponse(
             id = product.id,
             name = product.name,
@@ -36,22 +51,5 @@ class ProductServiceImpl(val productRepository: ProductRepository,
             createdAt = product.createdAt,
             updatedAt = product.updatedAt
         )
-    }
-
-    override fun get(id: String): ProductResponse {
-        val product = productRepository.findByIdOrNull(id)
-
-        if (product == null) {
-            //
-        } else{
-            return ProductResponse(
-                id = product.id,
-                name = product.name,
-                price = product.price,
-                quantity = product.quantity,
-                createdAt = product.createdAt,
-                updatedAt = product.updatedAt
-            )
-        }
     }
 }
