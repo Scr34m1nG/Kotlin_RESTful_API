@@ -49,6 +49,8 @@ class ProductServiceImpl(val productRepository: ProductRepository,
             throw NotFoundException()
         }
 
+        validationUtil.validate(updateProductRequest)
+
         product.apply {
             name = updateProductRequest.name!!
             price = updateProductRequest.price!!
