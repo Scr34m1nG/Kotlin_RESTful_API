@@ -8,5 +8,5 @@ data class ProductResponse(
     val price: Long,
     val quantity: Int,
     val createdAt: Date,
-    val updatedAt: Date
+    val updatedAt: Date?
 )
