@@ -5,6 +5,7 @@ import com.belajar.kotlinrestfulapi.model.ProductResponse
 import com.belajar.kotlinrestfulapi.model.UpdateProductRequest
 import com.belajar.kotlinrestfulapi.model.WebResponse
 import com.belajar.kotlinrestfulapi.service.ProductService
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -56,6 +57,20 @@ class ProductController(val productService: ProductService) {
             code = 200,
             status = "OK",
             data = productResponse
+        )
+    }
+
+    @DeleteMapping(
+        value = ["/api/product/{idProduct}"],
+        produces = ["application/json"]
+    )
+    fun deleteProduct(@PathVariable("idProduct") id: String): WebResponse<String> {
+        productService.delete(id)
+
+        return WebResponse(
+            code = 200,
+            status = "OK",
+            data = id
         )
     }
 
