@@ -45,10 +45,7 @@ class ProductServiceImpl(val productRepository: ProductRepository,
     }
 
     override fun update(id: String, updateProductRequest: UpdateProductRequest): ProductResponse {
-        val product = productRepository.findByIdOrNull(id)
-        if (product == null) {
-            throw NotFoundException()
-        }
+        val product = findProductByIdOrThrowNotFound(id)
 
         validationUtil.validate(updateProductRequest)
 
