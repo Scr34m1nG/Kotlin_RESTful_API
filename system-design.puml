@@ -8,9 +8,9 @@ node "kotlin RESTful api"{
 
 database "postgreSQL" as database
 
-user --> controller
-controller --> service
-service --> repository
-repository --> database
+user <--> controller
+controller <-> service
+service <-> repository
+repository <--> database
 
 @enduml
