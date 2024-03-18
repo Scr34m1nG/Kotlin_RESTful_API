@@ -4,6 +4,7 @@ import com.belajar.kotlinrestfulapi.entity.Product
 import com.belajar.kotlinrestfulapi.error.NotFoundException
 import com.belajar.kotlinrestfulapi.model.CreateProductRequest
 import com.belajar.kotlinrestfulapi.model.ProductResponse
+import com.belajar.kotlinrestfulapi.model.UpdateProductRequest
 import com.belajar.kotlinrestfulapi.repository.ProductRepository
 import com.belajar.kotlinrestfulapi.service.ProductService
 import com.belajar.kotlinrestfulapi.validation.ValidationUtil
@@ -40,6 +41,24 @@ class ProductServiceImpl(val productRepository: ProductRepository,
         } else{
             return convertProductToProductResponse(product)
         }
+    }
+
+    override fun update(id: String, updateProductRequest: UpdateProductRequest): ProductResponse {
+        val product = productRepository.findByIdOrNull(id)
+        if (product == null) {
+            throw NotFoundException()
+        }
+
+        product.apply {
+            name = updateProductRequest.name!!
+            price = updateProductRequest.price!!
+            quantity = updateProductRequest.quantity!!
+            updatedAt = Date()
+        }
+
+        productRepository.save(product)
+
+        return convertProductToProductResponse(product)
     }
 
     private fun convertProductToProductResponse(product: Product): ProductResponse{
