@@ -75,13 +75,12 @@ class ProductController(val productService: ProductService) {
 
     @GetMapping(
         value = ["/api/products"],
-        produces = ["application.json"]
+        produces = ["application/json"]
     )
     fun listProduct(@RequestParam(value = "size", defaultValue = "10") size: Int,
                     @RequestParam(value = "page", defaultValue = "0") page: Int): WebResponse<List<ProductResponse>> {
-        val request = ListProductRequest(size, page)
+        val request = ListProductRequest(page = page, size = size)
         val responses = productService.list(request)
-
         return WebResponse(
             code = 200,
             status = "OK",
