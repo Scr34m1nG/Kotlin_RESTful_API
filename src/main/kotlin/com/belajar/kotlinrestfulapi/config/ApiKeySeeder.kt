@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component
 @Component
 class ApiKeySeeder(val apiKeyRepository: ApiKeyRepository) : ApplicationRunner {
 
+    //create API key
     val apiKey = "SECRET"
 
     override fun run(args: ApplicationArguments?) {

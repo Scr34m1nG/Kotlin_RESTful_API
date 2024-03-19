@@ -8,7 +8,7 @@ import java.util.Date
 
 @Entity
 @Table(name = "products")
-data class Product(
+data class Product( // create table in database
 
     @Id
     val id: String,

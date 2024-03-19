@@ -20,7 +20,7 @@ class ProductServiceImpl(val productRepository: ProductRepository,
                          val validationUtil: ValidationUtil
 ) : ProductService{
     override fun create(createProductRequest: CreateProductRequest): ProductResponse {
-        validationUtil.validate(createProductRequest)
+        validationUtil.validate(createProductRequest) //validate if there is null it will throw an error
 
         val product = Product(
             id = createProductRequest.id!!,

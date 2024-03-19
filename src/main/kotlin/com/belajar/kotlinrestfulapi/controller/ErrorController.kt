@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 
 @RestControllerAdvice
-class ErrorController {
+class ErrorController { //this is a place where the error handler is located
 
     @ExceptionHandler(value = [ConstraintViolationException::class])
     fun validationHandler(constraintViolationException: ConstraintViolationException): WebResponse<String>{

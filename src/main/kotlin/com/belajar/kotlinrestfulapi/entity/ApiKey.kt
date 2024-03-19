@@ -6,7 +6,7 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "api_key")
-data class ApiKey (
+data class ApiKey ( //create table in database
     @Id
     val id: String
 )

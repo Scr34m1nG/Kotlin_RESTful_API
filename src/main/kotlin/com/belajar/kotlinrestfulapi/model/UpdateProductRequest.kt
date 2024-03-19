@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 
-data class UpdateProductRequest(
+data class UpdateProductRequest( //to prepare what variables are needed when providing update
 
     @field:NotBlank
     val name: String?,

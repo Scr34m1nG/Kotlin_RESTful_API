@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class ProductController(val productService: ProductService) {
 
-    @PostMapping(
+    @PostMapping( //set POST method
         value = ["/api/products"],
         produces = ["application/json"],
         consumes = ["application/json"]
@@ -30,7 +30,7 @@ class ProductController(val productService: ProductService) {
         )
     }
 
-    @GetMapping(
+    @GetMapping( //set GET method
         value = ["/api/products/{idProduct}"],
         produces = ["application/json"]
     )
@@ -43,7 +43,7 @@ class ProductController(val productService: ProductService) {
             data = productResponse
         )
     }
-    @PutMapping(
+    @PutMapping( //set UPDATE method
         value = ["/api/products/{idProduct}"],
         produces = ["application/json"],
         consumes = ["application/json"],
@@ -59,7 +59,7 @@ class ProductController(val productService: ProductService) {
         )
     }
 
-    @DeleteMapping(
+    @DeleteMapping( //set delete methode
         value = ["/api/products/{idProduct}"],
         produces = ["application/json"]
     )
@@ -73,7 +73,7 @@ class ProductController(val productService: ProductService) {
         )
     }
 
-    @GetMapping(
+    @GetMapping( //set GET for list method
         value = ["/api/products"],
         produces = ["application/json"]
     )

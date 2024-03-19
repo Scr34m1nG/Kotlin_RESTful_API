@@ -4,7 +4,7 @@ import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
 
-data class CreateProductRequest (
+data class CreateProductRequest ( // to prepare what variables are needed when creating product
 
     @field:NotBlank
     val id: String?,
